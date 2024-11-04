@@ -1,0 +1,5 @@
+begin
+    app_name := 'MyApp';
+    version := '1.0.3';
+    features := list('authentication', 'logging', 'notifications');
+end
