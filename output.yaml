@@ -1,11 +1,11 @@
 app_name: MyApp
-version: 1.0.3
-null: true
-max_connections: 15
 database: app_db
-user: admin
-password: secret
+debug_mode: true
 features:
 - authentication
 - logging
 - notifications
+max_connections: 15
+password: secret
+user: admin
+version: 1.0.3

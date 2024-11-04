@@ -41,7 +41,7 @@ def parse_config(text):
             current_dict = None
             continue
 
-        # Поиск массивов
+        # Обработка массивов
         list_match = re.match(r'(\w+)\s*:=\s*list\((.*?)\);?', line)
         if list_match:
             name, items = list_match.groups()
@@ -52,7 +52,7 @@ def parse_config(text):
                 config[name] = items_list
             continue
 
-        # Поиск выражений для вычислений в фигурных скобках
+        # Обработка выражений в фигурных скобках
         expr_match = re.match(r'(\w+)\s*:=\s*\{(.*?)\};?', line)
         if expr_match:
             name, expression = expr_match.groups()
@@ -63,24 +63,23 @@ def parse_config(text):
                 config[name] = result
             continue
 
-        # Поиск обычных ключ-значение пар
-        kv_match = re.match(r"(\w+)\s*:=\s*'(.+?)'|(\w+)\s*:=\s*(true|false|\d+);?", line)
+        # Обработка обычных ключ-значений, включая булевые значения
+        kv_match = re.match(r'(\w+)\s*:=\s*(.+?);', line)
         if kv_match:
-            name, str_value, bool_name, bool_or_num_value = kv_match.groups()
+            name, value = kv_match.groups()
+            value = value.strip()
 
-            # Определение значения
-            if str_value:
-                value = str_value  # Значение внутри кавычек
-            elif bool_or_num_value:
-                if bool_or_num_value.isdigit():
-                    value = int(bool_or_num_value)
-                elif bool_or_num_value in ['true', 'false']:
-                    value = bool_or_num_value == 'true'
-                else:
-                    value = bool_or_num_value
-            else:
-                value = ''  # На случай пустого значения
+            # Преобразование булевых значений
+            if value == 'true':
+                value = True
+            elif value == 'false':
+                value = False
+            elif value.startswith("'") and value.endswith("'"):
+                value = value.strip("'")
+            elif value.isdigit():
+                value = int(value)
 
+            # Добавление ключа и значения в текущий словарь или в основной конфиг
             if current_dict is not None:
                 current_dict[name] = value
             else:
