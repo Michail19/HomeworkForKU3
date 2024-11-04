@@ -1,0 +1,19 @@
+#|
+Это пример конфигурации для приложения
+с многострочным комментарием
+|#
+
+begin
+    app_name := 'MyApp';
+    version := '1.0.3';
+    debug_mode := true;
+    max_connections := {10 5 +};  # Вычисляется как 15
+end
+
+begin
+    database := 'app_db';
+    user := 'admin';
+    password := 'secret';
+end
+
+features := list('authentication', 'logging', 'notifications');
