@@ -1,0 +1,73 @@
+import unittest
+from main import parse_config
+
+
+class TestParseConfig(unittest.TestCase):
+    def test_string_values(self):
+        config_text = """
+        app_name := 'MyApp';
+        version := '1.0.3';
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['app_name'], 'MyApp')
+        self.assertEqual(config['version'], '1.0.3')
+
+    def test_boolean_values(self):
+        config_text = """
+        debug_mode := true;
+        maintenance := false;
+        """
+        config = parse_config(config_text)
+        self.assertTrue(config['debug_mode'])
+        self.assertFalse(config['maintenance'])
+
+    def test_numeric_values(self):
+        config_text = """
+        max_connections := 15;
+        timeout := {10 5 +};
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['max_connections'], 15)
+        self.assertEqual(config['timeout'], 15)
+
+    def test_list_values(self):
+        config_text = """
+        features := list('authentication', 'logging', 'notifications');
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['features'], ['authentication', 'logging', 'notifications'])
+
+    def test_empty_values(self):
+        config_text = """
+        app_name := '';
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['app_name'], '')
+
+    def test_multi_block_parsing(self):
+        config_text = """
+        begin
+            app_name := 'MyApp';
+            version := '1.0.3';
+            debug_mode := true;
+            max_connections := {10 5 +};
+        end
+
+        begin
+            database := 'app_db';
+            user := 'admin';
+            password := 'secret';
+        end
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['app_name'], 'MyApp')
+        self.assertEqual(config['version'], '1.0.3')
+        self.assertTrue(config['debug_mode'])
+        self.assertEqual(config['max_connections'], 15)
+        self.assertEqual(config['database'], 'app_db')
+        self.assertEqual(config['user'], 'admin')
+        self.assertEqual(config['password'], 'secret')
+
+
+if __name__ == "__main__":
+    unittest.main()
