@@ -24,7 +24,7 @@ def evaluate_expression(expression):
 
 def parse_config(text):
     config = {}
-    text = re.sub(r'#\|[\s\S]*?\|#', '', text)  # Удаление многострочных комментариев
+    text = re.sub(r'#\|[\s\S]*?\|#', '', text)
 
     lines = text.splitlines()
     current_dict = None
@@ -64,10 +64,23 @@ def parse_config(text):
             continue
 
         # Поиск обычных ключ-значение пар
-        kv_match = re.match(r'(\w+)\s*:=\s*(.+?);?', line)
+        kv_match = re.match(r"(\w+)\s*:=\s*'(.+?)'|(\w+)\s*:=\s*(true|false|\d+);?", line)
         if kv_match:
-            name, value = kv_match.groups()
-            value = value.strip("'")
+            name, str_value, bool_name, bool_or_num_value = kv_match.groups()
+
+            # Определение значения
+            if str_value:
+                value = str_value  # Значение внутри кавычек
+            elif bool_or_num_value:
+                if bool_or_num_value.isdigit():
+                    value = int(bool_or_num_value)
+                elif bool_or_num_value in ['true', 'false']:
+                    value = bool_or_num_value == 'true'
+                else:
+                    value = bool_or_num_value
+            else:
+                value = ''  # На случай пустого значения
+
             if current_dict is not None:
                 current_dict[name] = value
             else:
