@@ -1,6 +1,7 @@
 import re
 import yaml
 import sys
+import math
 
 
 def evaluate_expression(expression):
@@ -19,6 +20,15 @@ def evaluate_expression(expression):
         elif token == '/':
             b, a = stack.pop(), stack.pop()
             stack.append(a / b)
+        elif token == 'max()':
+            if stack:
+                max_val = max(stack)
+                stack.clear()
+                stack.append(max_val)
+        elif token == 'sqrt()':
+            if stack:
+                stack.append(math.sqrt(stack.pop()))
+
     return stack[0] if stack else None
 
 
