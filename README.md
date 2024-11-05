@@ -77,5 +77,6 @@ end
 # Результат работы программы
 
 
-![2024-11-04 (5)](https://github.com/user-attachments/assets/ca47616d-c9ff-4288-af74-7c41090cefea)
 ![2024-11-04 (6)](https://github.com/user-attachments/assets/a6b78620-1f18-45bb-8ae2-1fb3bcbc2e13)
+![2024-11-04 (5)](https://github.com/user-attachments/assets/ca47616d-c9ff-4288-af74-7c41090cefea)
+
