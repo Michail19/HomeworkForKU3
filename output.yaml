@@ -6,6 +6,8 @@ features:
 - logging
 - notifications
 max_connections: 15
+max_value: 10
 password: secret
+sqrt_value: 5.0
 user: admin
 version: 1.0.3

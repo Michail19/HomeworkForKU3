@@ -14,6 +14,8 @@ begin
     database := 'app_db';
     user := 'admin';
     password := 'secret';
+    max_value := {5 10 3 max()};
+    sqrt_value := {25 sqrt()};
 end
 
 features := list('authentication', 'logging', 'notifications');

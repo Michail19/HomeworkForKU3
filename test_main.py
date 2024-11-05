@@ -68,6 +68,15 @@ class TestParseConfig(unittest.TestCase):
         self.assertEqual(config['user'], 'admin')
         self.assertEqual(config['password'], 'secret')
 
+    def test_functions_max_sqrt(self):
+        config_text = """
+        max_value := {5 10 3 max()};
+        sqrt_value := {25 sqrt()};
+        """
+        config = parse_config(config_text)
+        self.assertEqual(config['max_value'], 10)
+        self.assertEqual(config['sqrt_value'], 5.0)
+
 
 if __name__ == "__main__":
     unittest.main()
