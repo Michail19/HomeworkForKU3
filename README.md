@@ -108,7 +108,20 @@ python -m unittest test_main.py
 
 # Результат работы программы
 
+**Вариант 1**
 
 ![2024-11-04 (6)](https://github.com/user-attachments/assets/a6b78620-1f18-45bb-8ae2-1fb3bcbc2e13)
+
 ![2024-11-04 (5)](https://github.com/user-attachments/assets/ca47616d-c9ff-4288-af74-7c41090cefea)
 
+**Вариант 2**
+
+![2024-11-12](https://github.com/user-attachments/assets/dc13c4f8-2273-4500-9c2a-3aedd03f658e)
+
+![2024-11-12 (2)](https://github.com/user-attachments/assets/f45cf246-9a9e-43a6-98cd-94703f5adc2d)
+
+**Вариант 3**
+
+![2024-11-12 (1)](https://github.com/user-attachments/assets/a59a1799-00c5-4ec7-9e81-e08b98ace80b)
+
+![2024-11-12 (3)](https://github.com/user-attachments/assets/a92f4f81-8dcd-453e-9b2c-c74467eade1c)
