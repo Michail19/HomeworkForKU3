@@ -72,6 +72,8 @@ def parse_config(text):
                         current_dict[name] = result
                     else:
                         config[name] = result
+                else:
+                    print("Error in line {", line, "}")
                 continue
             else:
                 # Обработка обычных ключ-значений
