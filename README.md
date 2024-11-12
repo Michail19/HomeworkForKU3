@@ -91,7 +91,7 @@ pip install pyyaml
 ```
 python main.py output.yaml < config.txt
 ```
-***!Внимание** Если запуск осуществляется через PowerShell, то команда запуска выглядит так:*
+***Внимание!** Если запуск осуществляется через PowerShell, то команда запуска выглядит так:*
 ```
 Get-Content config.txt | python main.py output.yaml
 ```
