@@ -67,10 +67,11 @@ def parse_config(text):
         if expr_match:
             name, expression = expr_match.groups()
             result = evaluate_expression(expression)
-            if current_dict is not None:
-                current_dict[name] = result
-            else:
-                config[name] = result
+            if result:
+                if current_dict is not None:
+                    current_dict[name] = result
+                else:
+                    config[name] = result
             continue
 
         # Обработка обычных ключ-значений

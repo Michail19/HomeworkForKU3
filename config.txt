@@ -7,6 +7,7 @@ begin
     app_name := 'MyApp';
     version := '1.0.3';
     debug_mode := true;
+    node := true
     max_connections := {10 5 +};  # Вычисляется как 15
 end
 
@@ -16,6 +17,7 @@ begin
     password := 'secret';
     max_value := {5 10 3 max()};
     sqrt_value := {25 sqrt()};
+    val := {sqrt(25)};
 end
 
 features := list('authentication', 'logging', 'notifications');
