@@ -61,38 +61,40 @@ def parse_config(text):
             else:
                 config[name] = items_list
             continue
-
-        # Обработка выражений в фигурных скобках
-        expr_match = re.match(r'(\w+)\s*:=\s*\{(.*?)\};?', line)
-        if expr_match:
-            name, expression = expr_match.groups()
-            result = evaluate_expression(expression)
-            if result:
-                if current_dict is not None:
-                    current_dict[name] = result
-                else:
-                    config[name] = result
-            continue
-
-        # Обработка обычных ключ-значений
-        kv_match = re.match(r'(\w+)\s*:=\s*(.+?);', line)
-        if kv_match:
-            name, value = kv_match.groups()
-            value = value.strip()
-
-            if value == 'true':
-                value = True
-            elif value == 'false':
-                value = False
-            elif value.startswith("'") and value.endswith("'"):
-                value = value.strip("'")
-            elif value.isdigit():
-                value = int(value)
-
-            if current_dict is not None:
-                current_dict[name] = value
+        else:
+            # Обработка выражений в фигурных скобках
+            expr_match = re.match(r'(\w+)\s*:=\s*\{(.*?)\};?', line)
+            if expr_match:
+                name, expression = expr_match.groups()
+                result = evaluate_expression(expression)
+                if result:
+                    if current_dict is not None:
+                        current_dict[name] = result
+                    else:
+                        config[name] = result
+                continue
             else:
-                config[name] = value
+                # Обработка обычных ключ-значений
+                kv_match = re.match(r'(\w+)\s*:=\s*(.+?);', line)
+                if kv_match:
+                    name, value = kv_match.groups()
+                    value = value.strip()
+
+                    if value == 'true':
+                        value = True
+                    elif value == 'false':
+                        value = False
+                    elif value.startswith("'") and value.endswith("'"):
+                        value = value.strip("'")
+                    elif value.isdigit():
+                        value = int(value)
+
+                    if current_dict is not None:
+                        current_dict[name] = value
+                    else:
+                        config[name] = value
+                else:
+                    print("Error in line {", line, "}")
 
     return config
 
