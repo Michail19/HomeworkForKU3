@@ -73,13 +73,12 @@ def parse_config(text):
                 config[name] = result
             continue
 
-        # Обработка обычных ключ-значений, включая булевые значения
+        # Обработка обычных ключ-значений
         kv_match = re.match(r'(\w+)\s*:=\s*(.+?);', line)
         if kv_match:
             name, value = kv_match.groups()
             value = value.strip()
 
-            # Преобразование булевых значений
             if value == 'true':
                 value = True
             elif value == 'false':
@@ -89,7 +88,6 @@ def parse_config(text):
             elif value.isdigit():
                 value = int(value)
 
-            # Добавление ключа и значения в текущий словарь или в основной конфиг
             if current_dict is not None:
                 current_dict[name] = value
             else:
